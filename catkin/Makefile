@@ -26,32 +26,12 @@ clone:
 	  git clone ${REL_GIT}/$${i}-release.git; \
         done
 
-
-pull:
-	@for i in ${REPOS}; do \
-          cd ${CURDIR}/$${i}; git pull; \
-          cd ${CURDIR}/$${i}-release; git pull; \
-        done
-
-push:
-	@for i in ${REPOS}; do \
-          cd ${CURDIR}/$${i}-release; git push --all; git push --tag; \
-	done
-
-reset:
-	@for i in ${REPOS}; do \
-          cd ${CURDIR}/$${i}-release; git reset --hard HEAD; \
-	done
-
-config:
-	@for i in ${REPOS}; do \
-          cd ${CURDIR}/$${i}-release; git-bloom-config new ${TRACK}; git push --all; git push --tag; \
-	done
-
 edit:
 	@for i in ${REPOS}; do \
-          bloom-release --edit-track --track ${TRACK} --rosdistro ${TRACK} $${i}; \
+	  bloom-release --edit-track --track ${TRACK} --rosdistro ${TRACK} $${i}; \
 	done
+
+new: edit
 
 bloom:
 	@for i in ${REPOS}; do \
